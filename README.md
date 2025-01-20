@@ -1,7 +1,7 @@
 # 🚗 Go Parking Simulator
 
 <p align="center">
-  <img src="https://golang.org/lib/godoc/images/go-logo-blue.svg" alt="Go Mascot" width="150"/>
+  <img src="./img/gopher.png" alt="Go Mascot" width="150"/>
 </p>
 
 [![Go Version](https://img.shields.io/github/go-mod/go-version/Oaparecido/go-parking)](https://golang.org/)
