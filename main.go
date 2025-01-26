@@ -25,7 +25,7 @@ func main() {
 		fmt.Println("* A -> Register park    *")
 		fmt.Println("* B -> Register vehicle *")
 		fmt.Println("* C -> Park vehicle     *")
-		fmt.Println("* D -> See spaces free  *")
+		fmt.Println("* D -> See p & v        *")
 		fmt.Println("* E -> Exit             *")
 		fmt.Println("*                       *")
 		fmt.Println("*************************")
@@ -38,16 +38,11 @@ func main() {
 		case "A":
 			registerPark(p)
 		case "B":
-			fmt.Println("**** Select vehicle ****")
-			fmt.Println("*                      *")
-			fmt.Println("* A -> Car             *")
-			fmt.Println("* B -> Scooter         *")
-			fmt.Println("*                      *")
-			fmt.Println("************************")
-			fmt.Println()
-
-			fmt.Scan(&command)
-			registerVehicle(command)
+			registerVehicle()
+		case "C":
+			parkVehicle()
+		case "D":
+			seeParksAndVehicles()
 
 		case "E":
 			fmt.Println("Exiting...")
@@ -75,7 +70,19 @@ func registerPark(p m.Parking) {
 	fmt.Println()
 }
 
-func registerVehicle(command string) {
+func registerVehicle() {
+	var command string
+
+	fmt.Println("**** Select vehicle type ****")
+	fmt.Println("*                           *")
+	fmt.Println("* A -> Car                  *")
+	fmt.Println("* B -> Scooter              *")
+	fmt.Println("*                           *")
+	fmt.Println("*****************************")
+	fmt.Println()
+
+	fmt.Scan(&command)
+
 	switch command {
 	case "A":
 		v = &m.Car{}
@@ -89,5 +96,48 @@ func registerVehicle(command string) {
 	vehicles = append(vehicles, v)
 	fmt.Println()
 	fmt.Println(vehicles)
+	fmt.Println()
+}
+
+func parkVehicle() {
+	fmt.Println("**** Select vehicle ****")
+
+	for i, v := range vehicles {
+		fmt.Println("* ", i, "->", v.GetPlate())
+	}
+
+	fmt.Println("************************")
+
+	var index int
+
+	fmt.Scan(&index)
+
+	vChoosen := vehicles[index]
+
+	fmt.Println("* -> Choosen vehicle:", vChoosen.GetPlate())
+	fmt.Println()
+
+	fmt.Println("**** Select park ****")
+
+	for i, p := range parks {
+		fmt.Println("* ", i, "->", p.GetName())
+	}
+
+	fmt.Println("************************")
+
+	fmt.Scan(&index)
+
+	pChoosen := parks[index]
+
+	fmt.Println("* -> Choosen park:", pChoosen.GetName())
+	fmt.Println()
+
+	pChoosen.ParkVehicle(1, vChoosen)
+	// TODO: Add validation if not park vehicle, show spaces free
+}
+
+func seeParksAndVehicles() {
+	fmt.Println("* -> Parks", parks)
+	fmt.Println("* -> Vehicles", vehicles)
 	fmt.Println()
 }
