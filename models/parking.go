@@ -41,6 +41,7 @@ func (p *Parking) ParkVehicle(idSpace int, vehicle i.Vehicle) {
 		p.spaces[idSpace].vehicle = vehicle
 		p.spaces[idSpace].vehicle.SetIncoming(time.Now())
 	}
+	// TODO: Adding if can't park vehicle in space.
 }
 
 func (p *Parking) RemoveCar(idSpace int, vehicle i.Vehicle) {
